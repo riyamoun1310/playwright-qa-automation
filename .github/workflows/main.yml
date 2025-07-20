@@ -1,0 +1,24 @@
+name: Playwright QA Summation
+
+on:
+  workflow_dispatch: # Allows you to run the workflow manually from GitHub
+
+jobs:
+  run-playwright-qa:
+    runs-on: ubuntu-latest # The operating system for the GitHub Actions runner
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4 # Action to get your project files
+
+      - name: Set up Python environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9' # Using Python 3.9
+
+      - name: Install Playwright dependencies
+        run: |
+          pip install playwright # Install Playwright library
+          playwright install --with-deps chromium # Install Chromium browser and its dependencies
+
+      - name: Run Playwright Scraper (23f2003911@ds.study.iitm.ac.in)
+        run: python scrape_and_sum.py # Execute your Python script
